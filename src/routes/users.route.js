@@ -1,14 +1,13 @@
 const express=require('express')
 const router = express.Router();
 
-const {validarJWT}=require('../middlewares/validateJWT')
-const {verifyToken}=require('../middlewares/verifyToken')
+const {verifyToken,verifyRole}=require('../middlewares/authMiddleware')
 
 //importacion de controllers
 const {createUser, loginUser,renewToken}= require('../controllers/users.controllers')
 
 //REGISTER
-router.post('/new', /*[validacion],*/ createUser)
+router.post('/new',/* [verifyRole],*/ createUser)
 
 //LOGIN
 router.post('/', /*[validacion],*/ loginUser)

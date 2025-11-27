@@ -1,6 +1,13 @@
 const jwt= require('jsonwebtoken')
 const {decodeToken}=require('../helpers/jwt')
 
+/**
+ * Verficacion de token existente en Headers
+ * @param {*} req requerimiento
+ * @param {*} res respuesta
+ * @param {*} next control
+ * @returns 
+ */
 const verifyToken=(req,res,next)=>{
 
     //captura el token que hay dentro authorization. diviendolo en un array para quitar la primera parte que es 'bearer'
@@ -45,4 +52,16 @@ const verifyToken=(req,res,next)=>{
             console.log(error)
         }
 }
-module.exports={verifyToken}
+
+const verifyRole=(req,res,next)=>{
+
+    //evalua el si role almacenado en el requerimiento es vacio o distinto al rol user
+    if(!req.role || req.role!=="user"){
+        return res.status(401).json({ //401 unathorized
+            ok:false,
+            msg:"No tienes permisos para realizar esta accion"
+        })
+    }
+}
+
+module.exports={verifyToken,verifyRole}
