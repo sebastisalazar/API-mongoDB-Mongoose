@@ -1,4 +1,5 @@
 const User=require('../models/User.model');
+//parse application/X-ww-form-urlencoded
 
 //modulo para encriptar password
 const bcrypt=require('bcryptjs')
@@ -75,7 +76,7 @@ const loginUser=async(req,res)=>{
     try {
 
         const {email,password}=req.body
-
+        
         //Se hace una busqueda por email para saber si el usuario existe
         const userExists=await User.findOne({email})
         
@@ -85,7 +86,10 @@ const loginUser=async(req,res)=>{
         if (!userExists) {
             return res.status(400).json({
                 ok:false,
-                msg:'Email no registrado'
+                msg:'Email no registrado',
+                email:email,
+                password:password
+
             })
         }
         //si el usuario existe compara las contraseñas

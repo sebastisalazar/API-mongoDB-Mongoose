@@ -22,6 +22,7 @@ app.use(cookieParser())
 app.use(express.json());
 
 //parse application/X-ww-form-urlencoded
+//// Parsea datos de formularios (POST) hacia req.body.
 app.use(express.urlencoded());
 
 //BBDD

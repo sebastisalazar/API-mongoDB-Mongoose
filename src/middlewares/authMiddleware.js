@@ -56,12 +56,12 @@ const verifyToken=(req,res,next)=>{
 const verifyRole=(req,res,next)=>{
 
     //evalua el si role almacenado en el requerimiento es vacio o distinto al rol user
-    if(!req.role || req.role!=="user"){
-        return res.status(401).json({ //401 unathorized
-            ok:false,
-            msg:"No tienes permisos para realizar esta accion"
-        })
-    }
+    // if(!req.role || req.role!=="user"){
+    //     return res.status(401).json({ //401 unathorized
+    //         ok:false,
+    //         msg:"No tienes permisos para realizar esta accion"
+    //     })
+    // }
 }
 
 module.exports={verifyToken,verifyRole}
